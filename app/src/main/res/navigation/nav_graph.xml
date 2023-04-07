@@ -10,7 +10,7 @@
         android:name="id.niteroomcreation.mncnews.presentation.home.HomeFragment"
         tools:layout="@layout/f_home">
         <action
-            android:id="@+id/action_homeFragment_to_detailFragment"
+            android:id="@+id/goto_detail"
             app:destination="@id/detailFragment" />
     </fragment>
     <fragment
