@@ -8,11 +8,17 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import id.niteroomcreation.mncnews.data.common.Resource
 import id.niteroomcreation.mncnews.databinding.FHomeBinding
+import id.niteroomcreation.mncnews.domain.model.Article
+import id.niteroomcreation.mncnews.presentation.home.hot.HotNewsAdapter
 import id.niteroomcreation.mncnews.util.LogHelper
+import id.niteroomcreation.mncnews.util.listener.GenericItemListener
 
 /**
  * Created by Septian Adi Wijaya on 07/04/2023.
@@ -66,12 +72,25 @@ class HomeFragment : Fragment() {
                     binding.swipeRefreshLayout.isRefreshing = true
                 }
                 is Resource.Success -> {
-                    binding.nestedScrollLayout.isVisible = it.data?.isEmpty() == false
+                    binding.nestedScrollLayout.isVisible = it.data.isEmpty() == false
                     binding.swipeRefreshLayout.isRefreshing = false
 
 
                     //take 3 for hot news as pager
-                    val hotNewsAdapter = emptyArray<String>()
+                    val hotNewsAdapter = HotNewsAdapter(
+                        this@HomeFragment,
+                        contents = it.data.take(3)
+                    )
+                    binding.rvHotNewsPager.adapter = hotNewsAdapter
+                    hotNewsAdapter.setListener(object : GenericItemListener<Article, Nothing> {
+                        override fun onItemViewClicked(item: Article) {
+                            val action: NavDirections = HomeFragmentDirections.gotoDetail(item)
+                            findNavController().navigate(action)
+                        }
+                    })
+
+                    TabLayoutMediator(binding.hotNewsTabLayout, binding.rvHotNewsPager)
+                    { _, _ -> }.attach()
 
                     //submit list data into adapter
 
@@ -94,6 +113,4 @@ class HomeFragment : Fragment() {
 
 
     }
-
-
 }

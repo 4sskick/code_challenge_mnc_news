@@ -22,7 +22,7 @@
                     android:orientation="vertical">
 
                     <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/hot_news_pager"
+                        android:id="@+id/rv_hot_news_pager"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
