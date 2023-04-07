@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import id.niteroomcreation.mncnews.data.common.Resource
 import id.niteroomcreation.mncnews.databinding.FHomeBinding
@@ -55,6 +56,11 @@ class HomeFragment : Fragment() {
             when (it) {
                 is Resource.Error -> {
                     binding.swipeRefreshLayout.isRefreshing = false
+                    Snackbar.make(
+                        binding.root,
+                        it.message ?: "Unknown Error occurred",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
                 is Resource.Loading -> {
                     binding.swipeRefreshLayout.isRefreshing = true
@@ -62,6 +68,14 @@ class HomeFragment : Fragment() {
                 is Resource.Success -> {
                     binding.nestedScrollLayout.isVisible = it.data?.isEmpty() == false
                     binding.swipeRefreshLayout.isRefreshing = false
+
+
+                    //take 3 for hot news as pager
+                    val hotNewsAdapter = emptyArray<String>()
+
+                    //submit list data into adapter
+
+
                 }
             }
 

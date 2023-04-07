@@ -1,76 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nested_scroll_layout"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nested_scroll_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/hot_news_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/hot_news_tab_layout"
-                    android:layout_width="200dp"
-                    android:layout_height="10dp"
-                    android:layout_gravity="bottom|center"
-                    app:tabBackground="@drawable/home_pager_selector"
-                    app:tabGravity="fill"
-                    app:tabIndicatorColor="@android:color/transparent"
-                    app:tabIndicatorHeight="0dp"
-                    app:tabPaddingEnd="8dp"
-                    app:tabPaddingStart="8dp"
-                    app:tabRippleColor="@null" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginEnd="18dp"
-                    android:background="@color/primary_variant_color" />
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="24dp"
-                    android:text="Latest News"
-                    android:textAllCaps="true"
-                    android:textSize="32sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginEnd="18dp"
-                    android:background="@color/primary_variant_color" />
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/hot_news_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="vertical"
-                    app:layoutManager="LinearLayoutManager" />
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/hot_news_tab_layout"
+                        android:layout_width="200dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="bottom|center"
+                        app:tabBackground="@drawable/home_pager_selector"
+                        app:tabGravity="fill"
+                        app:tabIndicatorColor="@android:color/transparent"
+                        app:tabIndicatorHeight="0dp"
+                        app:tabPaddingEnd="8dp"
+                        app:tabPaddingStart="8dp"
+                        app:tabRippleColor="@null" />
 
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginEnd="18dp"
+                        android:background="@color/primary_variant_color" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="24dp"
+                        android:paddingBottom="24dp"
+                        android:text="Latest News"
+                        android:textAllCaps="true"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="18dp"
+                        android:background="@color/primary_variant_color" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical"
+                        app:layoutManager="LinearLayoutManager" />
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
