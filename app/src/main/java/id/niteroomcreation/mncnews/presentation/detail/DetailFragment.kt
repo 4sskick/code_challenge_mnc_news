@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import id.niteroomcreation.mncnews.R
 import id.niteroomcreation.mncnews.data.common.Resource
 import id.niteroomcreation.mncnews.databinding.FDetailBinding
 import id.niteroomcreation.mncnews.util.CommonUtil.dateFormatWithTime
+import id.niteroomcreation.mncnews.util.EqualSpacingItemDecoration
 import id.niteroomcreation.mncnews.util.LogHelper
 
 /**
@@ -28,6 +31,7 @@ class DetailFragment : Fragment() {
     }
 
     private lateinit var binding: FDetailBinding;
+    private lateinit var adapterSlideShow: DetailSlideShowAdapter
     private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreateView(
@@ -66,8 +70,32 @@ class DetailFragment : Fragment() {
                     Glide.with(requireContext())
                         .load(it.data.article?.contentThumbnail)
                         .into(binding.detailThumbnail)
+
+
+                    it.data.article?.slideshow?.let { dataSlideShow ->
+                        LogHelper.j(TAG, dataSlideShow)
+
+                        adapterSlideShow.submit(dataSlideShow)
+                        adapterSlideShow.notifyDataSetChanged()
+
+                    }
                 }
             }
         })
+        setupAdapter()
+    }
+
+    private fun setupAdapter() {
+        adapterSlideShow = DetailSlideShowAdapter(emptyList())
+        binding.rvList.adapter = adapterSlideShow
+        binding.rvList.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
+        val equalSpacingItemDecoration = EqualSpacingItemDecoration(
+            resources.getDimensionPixelSize(R.dimen.spacing), 0
+        )
+        binding.rvList.addItemDecoration(equalSpacingItemDecoration)
     }
 }
