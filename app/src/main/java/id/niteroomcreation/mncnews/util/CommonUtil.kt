@@ -30,7 +30,7 @@ object CommonUtil {
         val formattedDate: Date = SimpleDateFormat(
             "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
             Locale.getDefault()
-        ).parse(this)
+        ).parse(this) as Date
         val now: Date = Date()
         val diffInMillis = now.time - formattedDate.time
 
