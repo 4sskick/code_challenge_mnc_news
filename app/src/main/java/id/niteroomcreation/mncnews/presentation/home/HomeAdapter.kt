@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import id.niteroomcreation.mncnews.databinding.INewsBinding
 import id.niteroomcreation.mncnews.domain.model.Article
 import id.niteroomcreation.mncnews.util.CommonUtil.dateFormatWithTime
+import id.niteroomcreation.mncnews.util.CommonUtil.elapseTimeFromDate
 import id.niteroomcreation.mncnews.util.listener.GenericItemListener
 
 /**
@@ -45,7 +46,7 @@ class ViewHolder(
     fun binds(item: Article) {
         Glide.with(itemView.context).load(item.contentThumbnail).into(binding.hotThumbnail)
         binding.hotTitle.text = item.title
-        binding.hotDate.text = item.createdAt.dateFormatWithTime()
+        binding.hotDate.text = item.createdAt.elapseTimeFromDate()
         itemView.setOnClickListener {
             listener.onItemViewClicked(item)
         }
