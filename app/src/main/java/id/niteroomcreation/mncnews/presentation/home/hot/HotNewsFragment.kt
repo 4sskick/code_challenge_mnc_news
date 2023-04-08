@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import id.niteroomcreation.mncnews.databinding.FHotNewsBinding
+import id.niteroomcreation.mncnews.databinding.INewsBinding
 import id.niteroomcreation.mncnews.domain.model.Article
 import id.niteroomcreation.mncnews.util.LogHelper
 import id.niteroomcreation.mncnews.util.listener.GenericItemListener
@@ -23,7 +23,7 @@ class HotNewsFragment : Fragment() {
         val ARTICLE_DATA = "article.data"
     }
 
-    private lateinit var binding: FHotNewsBinding
+    private lateinit var binding: INewsBinding
     private var listener: GenericItemListener<Article, Nothing>? = null
 
     fun setListener(listener: GenericItemListener<Article, Nothing>) {
@@ -36,7 +36,7 @@ class HotNewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FHotNewsBinding.inflate(inflater, container, false)
+        binding = INewsBinding.inflate(inflater, container, false)
         return binding.root
     }
 

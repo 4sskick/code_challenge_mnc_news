@@ -55,6 +55,15 @@ class HomeFragment : Fragment() {
             mViewModel.doGetArticles()
         }
 
+
+        var adapterLatestNews = HomeAdapter(object : GenericItemListener<Article, Nothing> {
+            override fun onItemViewClicked(item: Article) {
+                val action = HomeFragmentDirections.gotoDetail(item)
+                findNavController().navigate(action)
+            }
+        })
+        binding.rvList.adapter = adapterLatestNews
+
         mViewModel.state.observe(viewLifecycleOwner, Observer {
 
             LogHelper.j(TAG, it)
@@ -90,10 +99,10 @@ class HomeFragment : Fragment() {
                     })
 
                     TabLayoutMediator(binding.hotNewsTabLayout, binding.rvHotNewsPager)
-                    { _, _ -> }.attach()
+                    { tab, position -> }.attach()
 
                     //submit list data into adapter
-
+                    adapterLatestNews.submitList(it.data)
 
                 }
             }
