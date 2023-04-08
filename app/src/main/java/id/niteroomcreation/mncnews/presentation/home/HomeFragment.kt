@@ -50,6 +50,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             mViewModel.doGetArticles()
@@ -65,8 +66,6 @@ class HomeFragment : Fragment() {
         binding.rvList.adapter = adapterLatestNews
 
         mViewModel.state.observe(viewLifecycleOwner, Observer {
-
-            LogHelper.j(TAG, it)
 
             when (it) {
                 is Resource.Error -> {

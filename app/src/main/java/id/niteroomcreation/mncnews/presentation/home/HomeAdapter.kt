@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.niteroomcreation.mncnews.databinding.INewsBinding
 import id.niteroomcreation.mncnews.domain.model.Article
+import id.niteroomcreation.mncnews.util.CommonUtil.dateFormatWithTime
 import id.niteroomcreation.mncnews.util.listener.GenericItemListener
 
 /**
@@ -24,8 +25,6 @@ class HomeAdapter(private val listener: GenericItemListener<Article, Nothing>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binds(getItem(position))
     }
-
-
 }
 
 private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Article>() {
@@ -36,7 +35,6 @@ private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Article>() {
     override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
         return oldItem == newItem
     }
-
 }
 
 class ViewHolder(
@@ -47,7 +45,7 @@ class ViewHolder(
     fun binds(item: Article) {
         Glide.with(itemView.context).load(item.contentThumbnail).into(binding.hotThumbnail)
         binding.hotTitle.text = item.title
-        binding.hotDate.text = item.createdAt
+        binding.hotDate.text = item.createdAt.dateFormatWithTime()
         itemView.setOnClickListener {
             listener.onItemViewClicked(item)
         }

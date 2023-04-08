@@ -19,7 +19,7 @@
         tools:layout="@layout/f_detail" >
 
         <argument
-            android:name="article_model"
+            android:name="article.data"
             app:argType="id.niteroomcreation.mncnews.domain.model.Article" />
     </fragment>
 </navigation>

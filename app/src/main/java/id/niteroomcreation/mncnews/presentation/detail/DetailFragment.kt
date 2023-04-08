@@ -5,8 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import id.niteroomcreation.mncnews.data.common.Resource
 import id.niteroomcreation.mncnews.databinding.FDetailBinding
+import id.niteroomcreation.mncnews.util.CommonUtil.dateFormatWithTime
+import id.niteroomcreation.mncnews.util.LogHelper
 
 /**
  * Created by Septian Adi Wijaya on 07/04/2023.
@@ -16,7 +23,12 @@ import id.niteroomcreation.mncnews.databinding.FDetailBinding
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
+    companion object {
+        val TAG = DetailFragment::class.java.simpleName
+    }
+
     private lateinit var binding: FDetailBinding;
+    private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,5 +41,33 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.state.observe(viewLifecycleOwner, Observer() {
+
+            LogHelper.e(TAG, it)
+
+            when (it) {
+                is Resource.Error -> {
+                    Snackbar.make(
+                        binding.root,
+                        it.message ?: "Unknown Error occurred",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+                is Resource.Loading -> {
+
+                }
+                is Resource.Success -> {
+                    binding.detailContent.text = it.data.article?.content
+                    binding.detailContributor.text = it.data.article?.contributorName
+                    binding.detailTitle.text = it.data.article?.title
+                    binding.detailDate.text = it.data.article?.createdAt?.dateFormatWithTime()
+
+                    Glide.with(requireContext())
+                        .load(it.data.article?.contentThumbnail)
+                        .into(binding.detailThumbnail)
+                }
+            }
+        })
     }
 }

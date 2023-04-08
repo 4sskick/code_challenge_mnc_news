@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import id.niteroomcreation.mncnews.databinding.INewsBinding
 import id.niteroomcreation.mncnews.domain.model.Article
+import id.niteroomcreation.mncnews.util.CommonUtil.dateFormatWithTime
 import id.niteroomcreation.mncnews.util.LogHelper
 import id.niteroomcreation.mncnews.util.listener.GenericItemListener
 
@@ -55,7 +56,7 @@ class HotNewsFragment : Fragment() {
                 .into(binding.hotThumbnail)
 
             binding.hotTitle.text = item.title
-            binding.hotDate.text = item.createdAt
+            binding.hotDate.text = item.createdAt.dateFormatWithTime()
 
             binding.root.setOnClickListener {
                 listener?.onItemViewClicked(item)
