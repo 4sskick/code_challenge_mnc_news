@@ -50,12 +50,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.lifecycleOwner = this
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             mViewModel.doGetArticles()
         }
-
 
         var adapterLatestNews = HomeAdapter(object : GenericItemListener<Article, Nothing> {
             override fun onItemViewClicked(item: Article) {
@@ -107,18 +105,5 @@ class HomeFragment : Fragment() {
             }
 
         })
-
-        setupHotNews();
-        setupLatestNews();
-    }
-
-    private fun setupLatestNews() {
-
-
-    }
-
-    private fun setupHotNews() {
-
-
     }
 }

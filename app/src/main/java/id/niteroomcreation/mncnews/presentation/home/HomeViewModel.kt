@@ -19,8 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: NewsRepository,
-    private val dispatcher: Dispatcher
+    private val repository: NewsRepository
 ) : ViewModel() {
 
     private val state_ = MutableLiveData<Resource<List<Article>>>();
@@ -33,7 +32,7 @@ class HomeViewModel @Inject constructor(
 
     fun doGetArticles() {
         state_.value = Resource.Loading
-        viewModelScope.launch(dispatcher.io) {
+        viewModelScope.launch {
             val result = repository.getArticles()
             state_.postValue(result)
         }
